@@ -1,18 +1,26 @@
-<h1>Dashboard#expense</h1>
-<% for friendship in @user.friendships %>
+<%= render 'form'  %>
+<div id="page-wrapper">
+	<div class="container-fluid">
+		<div class="col-xs-6 col-sm-4">
+			<% for friendship in @user.friendships %>
 		<%= form_tag({ :controller => 'dashboard', :action => 'create_expense'}, :method => 'post' ) do %>
 		<%= label_tag(:amount, "Amount: " ) %>
 		<%= text_field_tag (:amount) , '',:class => 'form-control' %></br>
 		<%= select_tag "friends", options_for_select([ friendship.friend.email ]) %> <br>
-		<%= hidden_field_tag 'owed_by', friendship.friend.id %>
-		<%= hidden_field_tag 'owe_to', current_user.id %>
+		<%= hidden_field_tag 'owed_by', friendship.friend.email %>
+		<%= hidden_field_tag 'owe_to', current_user.email %>
+		<%= hidden_field_tag 'owedbyid', friendship.friend.id %>
+		<%= hidden_field_tag 'owetoid', current_user.id %>
 		<%= submit_tag("Add transaction" , :class => 'btn btn-primary') %>
 		<% end %>
 
-<%= link_to 'View Money Friends Owe' , {:controller => 'dashboard' ,:action =>'owe' , :id => current_user.id } %>
-<%= link_to 'View Money I Owe' , {:controller => 'dashboard' ,:action =>'i_owe' , :id => current_user.id } %>
+
 
 <% end %>
 
+		</div>
+	</div>
+</div>
+</div>
 
 		

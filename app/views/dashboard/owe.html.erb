@@ -1,2 +1,15 @@
-<%= @expense.amount%>
-<%= @friend_email%>
+
+
+<%= render 'form'  %>
+<div id="page-wrapper">
+	<div class="container-fluid">
+		<div class="col-xs-6 col-sm-4">
+			<% @expense.each do |money|%>
+			<%= money.owed_by %> owes you <%= money.amount %> rupees
+			<br>
+			<% end %>
+
+		</div>
+	</div>
+</div>
+</div>

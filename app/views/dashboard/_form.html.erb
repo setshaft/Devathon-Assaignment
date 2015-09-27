@@ -1,0 +1,31 @@
+<div id = 'wrapper'>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div>
+            <div class ='navbar-header'>
+                <a class="navbar-brand" href="#">Welcome <%= current_user.email %></a>
+            </div>
+        </div>
+        <div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <br><%= link_to "Add Friends", { :controller => 'dashboard' } %>
+                    </li>
+                    <li>
+                        <%= link_to 'View Friends' , :controller => :dashboard , :action => :view %>
+                    </li>
+                    <li>
+                        <%= link_to "Add Expenses", { :controller => 'dashboard', :action => 'expense'} %><br>
+                    </li>
+                    <li>
+                        <%= link_to 'View Money Friends Owe' , {:controller => 'dashboard' ,:action =>'owe' , :id => current_user.id } %>                        </li>
+                        <li>
+                            <%= link_to 'View Money I Owe' , {:controller => 'dashboard' ,:action =>'i_owe' , :id => current_user.id } %>
+                        </li>
+                        <li>
+                            <%= link_to "Sign Out", destroy_user_session_path, :method => "delete"  %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>

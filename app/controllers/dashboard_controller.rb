@@ -14,23 +14,24 @@ class DashboardController < ApplicationController
    
   end
 
-  def owe
-  @expense = Expense.find(params[:id])
-  @owed_by = @expense.owed_by
-  @friend_email = User.find(@owed_by).email
+   def owe
+  @expense = Money.where(owetoid: current_user.id)
+  
   end
 
   def create_expense
-     @expense = Expense.new
-    @expense.amount = params[:amount]
-    @expense.owed_by = params[:owed_by]
-    @expense.owe_to = params[:owe_to]
-    redirect_to '/dashboard/expense' if @expense.save
+     @money = Money.new
+    @money.amount = params[:amount]
+    @money.owed_by = params[:owed_by]
+    @money.owe_to = params[:owe_to]
+    @money.owedbyid = params[:owedbyid]
+    @money.owetoid = params[:owetoid]
+    redirect_to '/dashboard/expense' if @money.save
   end
 
   def i_owe
-    @expense = Expense.find_by_owed_by(current_user.id)
-    @owe_to = @expense.owe_to
-  @friend_email = User.find(@owe_to).email
+      @expense = Money.where(owedbyid: current_user.id)
+
+   
   end
 end

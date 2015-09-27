@@ -1,22 +1,46 @@
-
-<p>Username: <%= @user.email %></p>
-
-
-<h2>Friends</h2>
-<ul>
-  <% for friendship in @user.friendships %>
-    <li>
-      <%= friendship.friend.email %>
-      <%= link_to "remove",{ :controller => :friendships, :action => :destroy , :id => friendship.id},:method => :delete %>
-    </li>
-  <% end %>
-</ul>
-
-<%= link_to 'Find Friends' , :controller => :dashboard , :action => :index %>
-
-<h2>Friended by Users</h2>
-<ul>
-  <% for user in @user.inverse_friends %>
-    <li><%= user.email %></li>
-  <% end %>
-</ul>
+<%= render 'form'  %>
+<div id="page-wrapper">
+	<div class="container-fluid">
+			<div class="">
+				<body>
+					<h2>Friends</h2>
+					<table id="example" class="display" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>Email</th>
+								<th> Removing</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for friendship in @user.friendships %>
+							<tr>
+								<td>	<%= friendship.friend.email %> </td>
+								<td>    <%= link_to "remove",{ :controller => :friendships, :action => :destroy , :id => friendship.id},:method => :delete %></td>
+							</tr>
+							<% end %>
+						</tbody>
+					</table>
+					<hr>
+					<h2>Friended by Users</h2>
+					<table id="example1" class="display" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>Email</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for user in @user.inverse_friends %>
+							<tr>
+								<td><%= user.email %> </td>
+							</tr>
+							<% end %>
+						</tbody>
+					</table>
+					<script>
+						$(document).ready( function () {
+							$('#example').DataTable();
+							$('#example1').DataTable();
+						} );
+					</script>
+				</body>
+			</div>
