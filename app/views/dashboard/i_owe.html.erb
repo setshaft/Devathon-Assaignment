@@ -3,12 +3,19 @@
 <div id="page-wrapper">
 	<div class="container-fluid">
 		<div class="col-xs-6 col-sm-4">
+			<% hash = Hash.new %>
 			<% @expense.each do |money|%>
-			You owe <b> <%= money.amount%></b>  rupees to <b><%= money.owe_to %></b> 
+			<% if hash[money.owe_to] %>
+				<% hash[money.owe_to] = money.amount + hash[money.owe_to] %>
+			<% else %>
+				<% hash[money.owe_to] = money.amount %>
+			<% end %>
 			<br>
 
 			<% end %>
-
+			<% hash.each do | key, value | %>
+				You owe <b> <%= value %></b>  rupees to <b><%= key %></b> 
+			<% end %>
 		</div>
 	</div>
 </div>
