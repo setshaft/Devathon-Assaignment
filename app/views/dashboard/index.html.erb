@@ -1,0 +1,11 @@
+<h1>Dashboard#index</h1>
+<p>Find me in app/views/dashboard/index.html.erb</p>
+
+<% @users.each do |user|%>
+<%=user.email%>       <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
+<br>	
+<% end %>
+
+<%= link_to 'View Friends' , :controller => :dashboard , :action => :view %>
+
+<%= link_to 'Sign out' , destroy_user_session_path , :method => 'delete' %>
