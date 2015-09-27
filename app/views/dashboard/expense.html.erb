@@ -2,17 +2,18 @@
 <div id="page-wrapper">
 	<div class="container-fluid">
 		<div class="col-xs-6">
-			<% for friendship in @user.friendships %>
 		<%= form_tag({ :controller => 'dashboard', :action => 'create_expense'}, :method => 'post' ) do %>
 		<%= label_tag(:amount, "Amount: " ) %>
 		<%= text_field_tag (:amount) , '',:class => 'form-control' %></br>
-		<%= select_tag "friends", options_for_select([ friendship.friend.email ]) ,:class => 'form-control'%> <br>
-		<%= hidden_field_tag 'owed_by', friendship.friend.email %>
-		<%= hidden_field_tag 'owe_to', current_user.email %>
-		<%= hidden_field_tag 'owedbyid', friendship.friend.id %>
-		<%= hidden_field_tag 'owetoid', current_user.id %>
+		<%= select_tag "friends", options_for_select(@user.friends.collect {|p| [ p.email ,p.id ] }) ,:class => 'form-control'%> <br>
+		<%# for friendship in @user.friendships %>
+		<%#= hidden_field_tag 'owed_by', friendship.friend.email %>
+		<%#= hidden_field_tag 'owe_to', current_user.email %>
+		<%#= hidden_field_tag 'owedbyid', friendship.friend.id %>
+		<%#= hidden_field_tag 'owetoid', current_user.id %>
+		<%# end %>
 		<%= submit_tag("Add transaction" , :class => 'btn btn-primary') %>
-		<% end %>
+
 
 
 

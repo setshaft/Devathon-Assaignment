@@ -22,10 +22,10 @@ class DashboardController < ApplicationController
   def create_expense
      @money = Money.new
     @money.amount = params[:amount]
-    @money.owed_by = params[:owed_by]
-    @money.owe_to = params[:owe_to]
-    @money.owedbyid = params[:owedbyid]
-    @money.owetoid = params[:owetoid]
+    @money.owed_by = User.find(params[:friends].to_i).email
+    @money.owe_to = current_user.email
+    @money.owedbyid = params[:friends].to_i
+    @money.owetoid = current_user.id
     redirect_to '/dashboard/expense' if @money.save
   end
 
